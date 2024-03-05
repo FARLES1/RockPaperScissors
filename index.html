@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+
+        let playerChoice;
+
+        function getPlayerChoice() {
+            const playerPrompt = prompt('Select Rock, Paper or Scissors:');
+            const playerInput = playerPrompt != null ? playerPrompt.toLowerCase() : null;
+            if (playerInput === null) {
+                playerChoice = null;
+                return playerChoice;
+            } else if (playerInput === 'rock' || playerInput === 'paper' || playerInput === 'scissors') {
+                console.log('You choose ' + playerInput);
+                playerChoice = playerInput;
+                return playerChoice;
+            } else {
+                console.log('Your input is invalid');
+                getPlayerChoice();
+            }
+        }
+
+        let computerChoice;
+
+        function getComputerChoice() {
+            const calc = Math.floor(Math.random() * 3) + 1;
+            computerChoice = (calc === 1) ? 'rock' : (calc === 2) ? 'paper' : 'scissors';
+            return computerChoice;
+        }
+        let playerScore = 0;
+        let computerScore = 0;
+        let rounds = [];
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === 'rock') {
+                if (computerSelection === 'scissors') {
+                    playerScore++;
+                    rounds.push('Player');
+                    console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
+                } else if (computerSelection === 'paper') {
+                    computerScore++;
+                    rounds.push('Computer');
+                    console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+                } else {
+                    console.log('Tie! Both choose ' + playerSelection);
+                    rounds.push('Tie');
+                }
+            } else if (playerSelection === 'paper') {
+                if (computerSelection === 'rock') {
+                    playerScore++;
+                    rounds.push('Player');
+                    console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
+                } else if (computerSelection === 'scissors') {
+                    computerScore++;
+                    rounds.push('Computer');
+                    console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+                } else {
+                    console.log('Tie! Both choose ' + playerSelection);
+                    rounds.push('Tie');
+                }
+            } else if (playerSelection === 'scissors') {
+                if (computerSelection === 'paper') {
+                    playerScore++;
+                    rounds.push('Player');
+                    console.log('You won! ' + playerSelection + ' beats ' + computerSelection);
+                } else if (computerSelection === 'rock') {
+                    computerScore++;
+                    rounds.push('Computer');
+                    console.log('You lose! ' + computerSelection + ' beats ' + playerSelection);
+                } else {
+                    console.log('Tie! Both choose ' + playerSelection);
+                    rounds.push('Tie');
+                }
+            }
+        }
+
+        function playGame() {
+            for (i = 0; i < 5; i++) {
+                getPlayerChoice();
+                if (playerChoice == null) {
+                    console.log('You quit!');
+                    return;
+                } else {
+                    getComputerChoice();
+                    playRound(playerChoice, computerChoice);
+                    if (playerScore === 3 || computerScore === 3) {
+                        break;
+                    }
+                }
+            }
+            if (playerScore > computerScore) {
+                console.log('You won! \
+            Round Winners: ' + rounds);
+            } else if (playerScore < computerScore) {
+                console.log('You lose! \
+        Round Winners: ' + rounds);
+            } else if (playerScore === computerScore) {
+                console.log('It\'s a tie! \
+        Round Winners: ' + rounds);
+            }
+        }
+
+        playGame();
+    </script>
+</body>
+</html>
