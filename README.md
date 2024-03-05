@@ -1,1 +1,1 @@
-Rock, Paper, Scissors Project from The Odin Project in Javascript.
+Rock, Paper, Scissors Project from the Website "The Odin Project" in JavaScript.
